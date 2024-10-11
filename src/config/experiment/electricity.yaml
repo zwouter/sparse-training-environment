@@ -1,0 +1,22 @@
+defaults: 
+  - hyperparameters/default
+  - hyperparameters/mlp
+
+dataset: electricity
+experiment_type: optimization # / evaluation / optimization-evaluation / random-search / reproduction
+optimization_path: autosparse/out/smac_output/electricity/todo # manually set after optimization
+architecture: mlp
+budget: 650
+
+hyperparameters:
+# Experiment-specific parameters
+  batch_size:
+    type: constant
+    default: 128
+  epochs:
+    max: 200
+  use_dropout:
+    type: c
+    options: [true, false]
+    ordered: false
+    default: true

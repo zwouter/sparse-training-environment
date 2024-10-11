@@ -1,0 +1,63 @@
+defaults: 
+  - hyperparameters/default
+  - hyperparameters/mlp
+
+dataset: mnist
+experiment_type: reproduction
+architecture: mlp
+
+hyperparameters:
+  algorithm:
+    type: constant
+    default: set
+  sparsity:
+    type: r
+    scaling: linear
+    min: 0
+    max: 0.99
+    default: 0.5
+  sparsity_distribution:
+    type: constant
+    default: uniform
+  update_freq:
+    type: constant
+    default: 420
+  update_end:
+    type: constant
+    default: 0.8
+  num_mlp_layers:
+    type: constant
+    default: 3
+  size_first_mlp_layer:
+    type: constant
+    default: 1000
+  size_middle_mlp_layer:
+    type: constant
+    default: 1000
+  size_last_mlp_layer:
+    type: constant
+    default: 1000
+  learning_rate:
+    type: constant
+    default: 0.01
+  learning_rate_scheduler:
+    type: constant
+    default: constant
+  momentum:
+    type: constant
+    default: 0.9
+  weight_decay:
+    type: constant
+    default: 0.0002
+  use_dropout:
+    type: constant
+    default: True
+  dropout:
+    type: constant
+    default: 0.3
+  batch_size:
+    type: constant
+    default: 128
+  epochs:
+    type: constant
+    default: 200

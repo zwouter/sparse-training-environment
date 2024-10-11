@@ -1,0 +1,5 @@
+# Disable CNN related parameters
+conv_stage_1: null
+conv_stage_2: null
+conv_stage_3: null
+conv_stage_4: null

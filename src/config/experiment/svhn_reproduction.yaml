@@ -1,0 +1,63 @@
+defaults:
+  - hyperparameters/default
+  - hyperparameters/resnet
+
+dataset: svhn
+experiment_type: reproduction
+architecture: resnet
+
+hyperparameters:
+  algorithm:
+    type: constant
+    default: rigl
+  sparsity:
+    type: r
+    scaling: linear
+    min: 0
+    max: 0.99
+    default: 0.5
+  sparsity_distribution:
+    type: constant
+    default: erk
+  update_freq:
+    type: constant
+    default: 100
+  update_end:
+    type: constant
+    default: 0.75
+  conv_stage_1:
+    type: constant
+    default: 3
+  conv_stage_2:
+    type: constant
+    default: 3
+  conv_stage_3:
+    type: constant
+    default: 3
+  learning_rate:
+    type: constant
+    default: 0.1
+  learning_rate_scheduler:
+    type: constant
+    default: cosine
+  use_dropout:
+    type: constant
+    default: False
+  momentum:
+    type: constant
+    default: 0.9
+  weight_decay:
+    type: constant
+    default: 0.0001
+  use_label_smoothing:
+    type: constant
+    default: true
+  label_smoothing:
+    type: constant
+    default: 0.1
+  batch_size:
+    type: constant
+    default: 256
+  epochs:
+    type: constant
+    default: 135

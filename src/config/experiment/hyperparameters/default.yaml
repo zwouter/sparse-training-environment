@@ -1,0 +1,126 @@
+# Hyperparameters for the experiment
+# Can be categorical (c), integer (i) or real (r) valued
+algorithm:
+  type: c
+  options: [set, rigl, no_prune]
+  ordered: false
+  default: set
+sparsity:
+  type: r
+  scaling: linear
+  min: 0
+  max: 0.99
+  default: 0.5
+sparsity_distribution:
+  type: c
+  options: [uniform, erk]
+  ordered: false
+  default: uniform
+update_freq:
+  type: i
+  scaling: linear
+  min: 1
+  max: 1000000
+  default: 10
+update_end:
+  type: r
+  scaling: linear
+  min: 0.1
+  max: 1
+  default: 0.8
+num_mlp_layers:
+  type: i
+  scaling: linear
+  min: 1
+  max: 10
+  default: 3
+size_first_mlp_layer:
+  type: i
+  scaling: linear
+  min: 1
+  max: 1000
+  default: 100
+size_middle_mlp_layer:
+  type: i
+  scaling: linear
+  min: 1
+  max: 1000
+  default: 100
+size_last_mlp_layer:
+  type: i
+  scaling: linear
+  min: 1
+  max: 1000
+  default: 100
+conv_stage_1:
+  type: i
+  scaling: linear
+  min: 1
+  max: 4
+  default: 2
+conv_stage_2:
+  type: i
+  scaling: linear
+  min: 1
+  max: 4
+  default: 2
+conv_stage_3:
+  type: i
+  scaling: linear
+  min: 1
+  max: 4
+  default: 2
+conv_stage_4:
+  type: i
+  scaling: linear
+  min: 1
+  max: 4
+  default: 2
+learning_rate:
+  type: r
+  scaling: log
+  min: 1e-5
+  max: 1
+  default: 0.01
+learning_rate_scheduler:
+  type: constant
+  default: constant
+momentum:
+  type: r
+  scaling: linear
+  min: 0
+  max: 1
+  default: 0.9
+weight_decay:
+  type: r
+  scaling: log
+  min: 1e-7
+  max: 1e-2
+  default: 0.001
+use_dropout:
+  type: constant
+  default: false
+dropout:
+  type: r
+  scaling: linear
+  min: 0.1
+  max: 0.5
+  default: 0.3
+use_label_smoothing:
+  type: constant
+  default: false
+label_smoothing:
+  type: r
+  scaling: linear
+  min: 0.05
+  max: 0.25
+  default: 0.1
+batch_size:
+  type: constant
+  default: 256
+epochs:
+  type: i
+  scaling: log
+  min: 1
+  max: 500
+  default: 20

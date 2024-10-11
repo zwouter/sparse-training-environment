@@ -1,0 +1,5 @@
+# Disable MLP related parameters
+num_mlp_layers: null
+size_first_mlp_layer: null
+size_middle_mlp_layer: null
+size_last_mlp_layer: null
