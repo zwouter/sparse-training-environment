@@ -77,7 +77,7 @@ class Experiment:
         if self.path:
             cs_path = self.path + "/configspace.json"
             logger.info(f"Storing configurationspace: {cs_path}")
-            os.makedirs(os.path.dirname(self.path), exist_ok=True)
+            os.makedirs(os.path.dirname(cs_path), exist_ok=True)
             with open(cs_path, "w+") as file:
                 file.write(cs_json.write(self.configspace))
                 

@@ -61,7 +61,7 @@ class Network():
     
     def get_inference_flops(self, input_dimensions) -> list[tuple[str, float]]:
         """
-        Calculates the number of flops needed for inference of each layer of the network.
+        Calculates the number of flops (multiplications) needed for inference of each layer of the network.
         Creates a list of tuples of the form (layer_name, flops) for each layer.
         """
         flops = []
@@ -69,7 +69,7 @@ class Network():
             prev_layer_size = np.prod(input_dimensions)
             for layer_type, layer_info in self.layers:
                 if layer_type == LayerType.DENSE:
-                    flops.append((layer_info['name'] + "/kernel", float(2 * prev_layer_size * layer_info['features'])))
+                    flops.append((layer_info['name'] + "/kernel", float(prev_layer_size * layer_info['features'])))
                     # flops.append((layer_info['name'], "bias", layer_info['features']))
                     prev_layer_size = layer_info['features']
         if self.architecture == NetworkArchitecture.RESNET.value:
@@ -80,8 +80,8 @@ class Network():
                     width = round(width / layer_info.get('strides', (1, 1))[0])
                     height = round(height / layer_info.get('strides', (1, 1))[1])
                     
-                    # Conv FLOPs = 2 * output_width * output_height * kernel_width * kernel_height * input_channels * output_channels
-                    flops.append((layer_info['name'] + "/kernel", float(2 * height * width * layer_info.get('kernel_size', (0, 0))[1] * layer_info.get('kernel_size', (0, 0))[0] * channels * layer_info['features'])))
+                    # Conv FLOPs = output_width * output_height * kernel_width * kernel_height * input_channels * output_channels
+                    flops.append((layer_info['name'] + "/kernel", float(height * width * layer_info.get('kernel_size', (0, 0))[1] * layer_info.get('kernel_size', (0, 0))[0] * channels * layer_info['features'])))
                     channels = layer_info['features']
                 elif layer_type == LayerType.POOL:
                     # Emit FLOPs for the pooling layer, but it does change the size
@@ -89,7 +89,7 @@ class Network():
                     height = round(height / layer_info.get('strides', (1, 1))[1])
                 elif layer_type == LayerType.DENSE:
                     # ResNets only have 1 dense layer at the end, before which the input is flattened to the number of channels.
-                    flops.append((layer_info['name'] + "/kernel", float(2 * channels * layer_info['features'])))
+                    flops.append((layer_info['name'] + "/kernel", float(channels * layer_info['features'])))
         return flops
 
 
